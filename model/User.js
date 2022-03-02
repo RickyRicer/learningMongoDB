@@ -1,5 +1,5 @@
-const {Schema, model} = require('mongoose');
-const {isEmail} = require('validator');
+const { Schema, model } = require('mongoose');
+const { isEmail } = require('validator');
 // The Schema is very similar to the "class" that we were creating in Sequelize
 const userSchema = new Schema({
 	// username: String,
