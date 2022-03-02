@@ -1,7 +1,9 @@
+const Blog = require('./Blog');
 const Todo = require('./Todo');
 const User = require('./User');
 
 module.exports = {
-    Todo,
-    User,
-};
+	Blog,
+	Todo,
+	User,
+}

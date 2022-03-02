@@ -1,10 +1,11 @@
 const router = require('express').Router();
-const { 
-    createUser, 
-    getAllUsers, 
-    getUserById,
-    updateUserById,
-    deleteUserById,
+const {
+	createUser,
+	getAllUsers,
+	getUserById,
+	updateUserById,
+	deleteUserById,
+	addHobbyToUserById,
 } = require('../../../controllers/userController');
 // /api/users prepended to every route
 // router.post('/', createUser);
@@ -16,9 +17,10 @@ router.route('/')
 router.put('/addHobby/:userId', addHobbyToUserById);
 
 router.route('/:userId')
-    .get(getUserById)
-    .put(updateUserById)
-    .delete(deleteUserById);
+	.get(getUserById)
+	.put(updateUserById)
+	.delete(deleteUserById);
+
 
 module.exports = router;
 
