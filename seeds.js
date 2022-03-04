@@ -138,8 +138,10 @@ const seedDb = async () => {
 	];
 
 	const [like1, like2] = await Like.insertMany(likesToCreate);
-	const firstBlog = blogs[0];
-
+	// const firstBlog = blogs[0];
+	const blogs = await Blog.find({}).sort({ description: 0 });
+	console.log(blogs);
+	
 	// How to add a like
 	const updatedBlog = await Blog.findByIdAndUpdate(
 		firstBlog._id,
@@ -172,10 +174,10 @@ const seedDb = async () => {
 		}
 	).populate({
 		path: 'likeIds',
-		populate: 'userId'
+		populate: 'userId',
 	});
 
-    console.log('After adding', updatedBlogPartTwo.likeIds);
+    console.log(updatedBlogPartTwo);
 
 
 	// await firstBlog.save();

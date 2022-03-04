@@ -1,9 +1,11 @@
-const { Schema, model } = require('mongoose');
-const { isEmail } = require('validator');
+const {Schema, model} = require('mongoose');
+const {isEmail} = require('validator');
 // The Schema is very similar to the "class" that we were creating in Sequelize
 const userSchema = new Schema({
 	// username: String,
 	// asudagduiagda
+	firstName: String,
+	lastName: String,
 	username: {
 		type: String,
 		// before this data is saved to the database, all of the trailing white spaces will be removed
@@ -58,18 +60,35 @@ const userSchema = new Schema({
 			trim: true,
 		},
 	}
+}, {
+	toJSON: {
+		virtuals: true,
+	}
 });
 
-//model methods
+userSchema.virtual('fullName').get(function() {
+	return `${this.firstName} ${this.lastName}`;
+});
+
+// Model methods
 userSchema.statics.findByRole = async function(role) {
 	return await this.find({ role });
 }
 
 // Instance methods
 userSchema.methods.greeting = function() {
-	// this === the single document that is calling the greeting function
-	console.log(`Hi my username is ${this.username}`);
+//	 this === the single document that is calling the greeting function
+	console.log(`Hi my username is ${this.username} my role is ${this.role}`);
 }
+
+/*
+* findById
+* find
+* findByIdAndUpdate
+* findByIdAndDelete
+*
+*
+* */
 
 const User = model('User', userSchema);
 
